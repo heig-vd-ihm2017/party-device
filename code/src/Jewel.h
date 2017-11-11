@@ -3,12 +3,13 @@ https://learn.adafruit.com/adafruit-neopixel-uberguide
 https://learn.adafruit.com/jewel-hair-stick/arduino-code
 */
 
-#ifndef LIGHT_H
-#define LIGHT_H
+#ifndef JEWEL_H
+#define JEWEL_H
 
 #include <Adafruit_NeoPixel.h>
 
-class Light {
+class Jewel
+{
 
 public:
 
@@ -17,7 +18,10 @@ public:
      * @param pin The pin number on which the NeoPixel is connected.
      * @param numberOfPixels The number of NeoPixels connected
      */
-    Light(uint8_t pin, uint16_t numberOfNeoPixels, neoPixelType type = NEO_GRBW + NEO_KHZ800) :
+    Jewel(uint8_t pin,
+        uint16_t numberOfNeoPixels,
+        neoPixelType type = NEO_GRBW + NEO_KHZ800)
+    :
         numberOfNeoPixels(numberOfNeoPixels)
     {
         pixels = Adafruit_NeoPixel(numberOfNeoPixels, pin, type);
@@ -98,4 +102,4 @@ protected:
 
 };
 
-#endif // LIGHT_H
+#endif // JEWEL_H

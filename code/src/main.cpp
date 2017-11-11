@@ -1,13 +1,15 @@
-#include "light.h"
-#include "microphone.h"
+#include <Arduino.h>
+
+#include "MAX9814.h"
+#include "Jewel.h"
 
 #define LED_PIN             1  // Pin on which the NeoPixel is connected (Gemma: D0)
 #define MIC_PIN             1  // Pin on which the microphone is conncted (Gemma: D2/A1)
 
-#define NUMBER_OF_PIXELS    7  // Number of pixels you are using
+#define NUMBER_OF_PIXELS 7 // Number of pixels you are using
 
-Light light = Light(LED_PIN, NUMBER_OF_PIXELS);
-Microphone microphone = Microphone(MIC_PIN);
+Jewel jewel = Jewel(LED_PIN, NUMBER_OF_PIXELS);
+MAX9814 mic = MAX9814(MIC_PIN, 600);
 
 void setup()
 {
@@ -15,30 +17,24 @@ void setup()
 
 void loop()
 {
-    int volume = microphone.soundLevel();
+    mic.fft();
 
-    if (volume <= 50)
+    uint16_t peakFreq = mic.getPeakFrequency();
+    uint16_t highFreq = mic.getHighFrequency();
+    uint16_t mediumFreq = mic.getMediumFrequency();
+    uint16_t lowFreq = mic.getLowFrequency();
+
+    uint16_t red = map(highFreq, 0, 64, 255, 0);
+    uint16_t blue = map(lowFreq, 0, 64, 255, 0);
+    uint16_t green = map(mediumFreq, 0, 64, 255, 0);
+
+    if (red > blue)
     {
-        light.setPixelsColor(20, 0, 0, 0);
+        jewel.setPixelsColor(red, 0, 0, 0);
     }
-    else if (volume <= 100)
+    else
     {
-        light.setPixelsColor(20, 20, 0, 0);
+        jewel.setPixelsColor(0, 0, blue, 0);
     }
-    else if (volume <= 150)
-    {
-        light.setPixelsColor(0, 20, 20, 0);
-    }
-    else if (volume <= 200)
-    {
-        light.setPixelsColor(0, 0, 20, 20);
-    }
-    else if (volume <= 250)
-    {
-        light.setPixelsColor(20, 20, 20, 0);
-    }
-    else if (volume > 250)
-    {
-        light.setPixelsColor(20, 20, 20, 20);
-    }
+
 }
