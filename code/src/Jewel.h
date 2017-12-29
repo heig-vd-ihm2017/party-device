@@ -14,7 +14,7 @@ class Jewel
 public:
 
     /**
-     * Light Constructor.
+     * Jewel Constructor.
      * @param pin The pin number on which the NeoPixel is connected.
      * @param numberOfPixels The number of NeoPixels connected
      */
