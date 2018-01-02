@@ -1,0 +1,9 @@
+[submodule "code/lib/Adafruit_NeoPixel"]
+	path = code/lib/Adafruit_NeoPixel
+	url = git@github.com:adafruit/Adafruit_NeoPixel.git
+[submodule "code/lib/ooPinChangeInt"]
+	path = code/lib/ooPinChangeInt
+	url = git@github.com:GreyGnome/ooPinChangeInt.git
+[submodule "code/lib/Metro-Arduino-Wiring"]
+	path = code/lib/Metro-Arduino-Wiring
+	url = git@github.com:thomasfredericks/Metro-Arduino-Wiring
