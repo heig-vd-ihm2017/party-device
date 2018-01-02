@@ -55,7 +55,7 @@ public:
      * getSoundLevel Get the sound level from the microphone.
      * @return The sound level between 0 and 255.
      */
-    uint16_t getSoundLevel()
+    uint16_t soundLevel()
     {
         uint16_t sample;
 
