@@ -3,6 +3,7 @@
 #include "MAX9814.h"
 #include "Jewel.h"
 #include "Button.h"
+#include "modeSoundLevel.h"
 
 #define BTN_PIN 2 // NEED TO CHANGE THIS TO 0. CONNECT TO THE MIC PIN Pin on which the button is conncted (Gemma: D0)
 #define LED_PIN 1 // Pin on which the NeoPixel is connected (Gemma: D1)
@@ -14,18 +15,26 @@ Button modeButton;
 Jewel jewel(LED_PIN, NUMBER_OF_PIXELS);
 MAX9814 mic(MIC_PIN);
 
+void (*mode)(Jewel*, MAX9814*) = NULL;
+
 void setup()
 {
     // Enable interruption for the button
     enableInterrupt(BTN_PIN, []() { modeButton.pressed(); }, CHANGE);
+
+    // Set the first mode
+    mode = modeSoundLevel;
 }
 
 void loop()
 {
-    delay(3000);
     if (modeButton.hasBeenPressed()) {
-        jewel.setPixelColor(1, 10, 0, 0, 0);
+
+      // TODO change the mode of the party device
+
+
     } else {
-        jewel.setPixelColor(1, 0, 10, 0, 0);
+      // Execute the current mode
+      mode(&jewel, &mic);
     }
 }
