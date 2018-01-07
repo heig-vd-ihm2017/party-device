@@ -15,7 +15,7 @@
 */
 void modeSoundLevel(Jewel* jewel, MAX9814* mic) {
   // Get the sound level and the number of pixels that are used
-  uint8_t soundLevel = mic->soundLevel();
+  uint16_t soundLevel = mic->soundLevel();
   uint16_t numberOfPixels = jewel->numberOfPixels();
 
   // Calculate the range size of each interval
