@@ -24,7 +24,7 @@ void setup()
     enableInterrupt(BTN_PIN, []() { modeButton.pressed(); }, CHANGE);
 
     // Set the first mode
-    mode = modeFixedRateRythmeGame;
+    mode = modeFixedRateRythmGame;
 }
 
 void loop()
