@@ -15,46 +15,69 @@ Button modeButton;
 Jewel jewel(LED_PIN, NUMBER_OF_PIXELS);
 MAX9814 mic(MIC_PIN);
 
-void (*mode)(Jewel*, MAX9814*) = nullptr;
+//ModeLoader modeLoader(2, &jewel);
 
-SoundLevel s = SoundLevel(&jewel, &mic);
-FixedRateRythmGame f = FixedRateRythmGame(&jewel, &mic);
+Mode* soundLevel = new SoundLevel(&jewel, &mic);
+Mode* fixedRateRythmGame = new FixedRateRythmGame(&jewel, &mic);
 
-Mode* m = &s;
+Metro metro = Metro(2000);
 
-bool lol = false;
+Mode** modes = (Mode**) new Mode*[2];
+
+int16_t index = 0;
+
+Mode* mode = NULL;
 
 void setup()
 {
     // Enable interruption for the button
     enableInterrupt(BTN_PIN, []() { modeButton.pressed(); }, CHANGE);
 
-    // Set the first mode
-    mode = soundLevel;
-}
+    //modeLoader.addMode(&soundLevel);
+    //modeLoader.addMode(&fixedRateRythmGame);
 
-Metro m2 = Metro(1000);
+    //modes = (Mode**) malloc(2 * sizeof(Mode*));
+    modes[0] = soundLevel;
+    modes[1] = fixedRateRythmGame;
+
+    mode = fixedRateRythmGame;
+}
 
 void loop()
 {
-    // if (modeButton.hasBeenPressed()) {
-    //   // TODO change the mode of the party device
-    //   mode = fixedRateRythmGame;
-    //
-    // } else {
-    //   // Execute the current mode
-    //   mode(&jewel, &mic);
-    // }
-    m->apply();
 
-    if(m2.check()) {
-      if (lol) {
-        m = &f;
-        lol = false;
-      } else {
-        m = &s;
-        lol = true;
-      }
+    // if (modeButton.hasBeenPressed() || metro.check()) {
+    //
+    //     jewel.setPixelsColor(0, 0, 5, 0);
+    // } else {
+    //   jewel.setPixelsColor(0, 0, 5, 0);
+    //     //modeLoader.runMode();
+    // }
+
+    // if (metro.check()) {
+    //   if (lol) {
+    //     modeLoader.loadNextMode();
+    //     lol = false;
+    //   } else {
+    //     lol = true;
+    //   }
+    // }
+    if (metro.check()) {
+      index = (index + 1) % 2;
+      metro.reset();
     }
+
+    //modes[index]->apply();
+    soundLevel->apply();
+
+    //mode->apply();
+
+    // if (index == 1) {
+    //   jewel.setPixelsColor(0, 0, 5, 0);
+    // } else {
+    //   jewel.setPixelsColor(0, 0, 0, 0);
+    //   //modes[index]->apply();
+    // }
+    //modeLoader.runMode();
 
 }
