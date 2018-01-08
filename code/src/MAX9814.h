@@ -44,8 +44,8 @@ public:
         GainControl gainControl = GainControl::UNCONNECTED,
         AttackReleaseRatio attackReleaseRatio = AttackReleaseRatio::UNCONNECTED)
     :
-        pin(pin),
-        gainControl(gainControl),
+        _pin(pin),
+        _gainControl(gainControl),
         attackReleaseRatio(attackReleaseRatio)
     {
 
@@ -68,7 +68,7 @@ public:
         // Sample for 20 ms
         while (millis() - startChorno < 20)
         {
-            sample = analogRead(pin);
+            sample = analogRead(_pin);
 
             // Toss out spurious readings
             if (sample < 1024)
@@ -94,10 +94,10 @@ public:
 protected:
 
     //! The pin used to access the microphone.
-    uint8_t pin;
+    uint8_t _pin;
 
     //! The current applied gain control for the microphone.
-    GainControl gainControl;
+    GainControl _gainControl;
 
     //! The current applied attack/release ratio for the microphone.
     AttackReleaseRatio attackReleaseRatio;

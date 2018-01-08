@@ -1,9 +1,6 @@
 [submodule "code/lib/Adafruit_NeoPixel"]
 	path = code/lib/Adafruit_NeoPixel
 	url = git@github.com:adafruit/Adafruit_NeoPixel.git
-[submodule "code/lib/Metro-Arduino-Wiring"]
-	path = code/lib/Metro-Arduino-Wiring
-	url = git@github.com:thomasfredericks/Metro-Arduino-Wiring
 [submodule "code/lib/EnableInterrupt"]
 	path = code/lib/EnableInterrupt
 	url = git@github.com:GreyGnome/EnableInterrupt

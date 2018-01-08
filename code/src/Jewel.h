@@ -22,16 +22,16 @@ public:
         uint16_t numberOfNeoPixels,
         neoPixelType type = NEO_GRBW + NEO_KHZ800)
     :
-        numberOfNeoPixels(numberOfNeoPixels)
+        _numberOfNeoPixels(numberOfNeoPixels)
     {
-        pixels = Adafruit_NeoPixel(numberOfNeoPixels, pin, type);
-        pixels.begin();
+        _pixels = Adafruit_NeoPixel(numberOfNeoPixels, pin, type);
+        _pixels.begin();
 
         // Set the brightness to the max
-        pixels.setBrightness(255);
+        _pixels.setBrightness(255);
 
         // Shut down every LEDs
-        pixels.show();
+        _pixels.show();
     }
 
     /**
@@ -59,8 +59,8 @@ public:
      */
     void setPixelColor(uint16_t pixelNumber, uint8_t red, uint8_t green,  uint8_t blue, uint8_t white)
     {
-        pixels.setPixelColor(pixelNumber, red, green, blue, white);
-        pixels.show();
+        _pixels.setPixelColor(pixelNumber, red, green, blue, white);
+        _pixels.show();
     }
 
     /**
@@ -86,19 +86,23 @@ public:
      */
     void setPixelsColor(uint8_t red, uint8_t green,  uint8_t blue, uint8_t white)
     {
-        for (uint8_t pixelNumber = 0; pixelNumber < numberOfNeoPixels; pixelNumber++)
+        for (uint8_t pixelNumber = 0; pixelNumber < _numberOfNeoPixels; pixelNumber++)
         {
             setPixelColor(pixelNumber, red, green, blue, white);
         }
     }
 
+    uint16_t numberOfPixels() {
+      return _numberOfNeoPixels;
+    }
+
 protected:
 
     //! The number of NeoPixels.
-    uint16_t numberOfNeoPixels;
+    uint16_t _numberOfNeoPixels;
 
     //! The NeoPixel's object.
-    Adafruit_NeoPixel pixels;
+    Adafruit_NeoPixel _pixels;
 
 };
 
