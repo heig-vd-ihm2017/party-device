@@ -4,9 +4,9 @@
 #include "Jewel.h"
 #include "Button.h"
 
-#define BTN_PIN 2 // NEED TO CHANGE THIS TO 0. CONNECT TO THE MIC PIN Pin on which the button is conncted (Gemma: D0)
+#define BTN_PIN 0 // NEED TO CHANGE THIS TO 0. CONNECT TO THE MIC PIN Pin on which the button is conncted (Gemma: D0)
 #define LED_PIN 1 // Pin on which the NeoPixel is connected (Gemma: D1)
-#define MIC_PIN 1 // Pin on which the microphone is conncted (Gemma: D2/A1)
+#define MIC_PIN 2 // Pin on which the microphone is conncted (Gemma: D2/A1)
 
 #define NUMBER_OF_PIXELS 7 // Number of pixels you are using
 
@@ -22,9 +22,9 @@ void setup()
 
 void loop()
 {
-    delay(3000);
     if (modeButton.hasBeenPressed()) {
         jewel.setPixelColor(1, 10, 0, 0, 0);
+        delay(300);
     } else {
         jewel.setPixelColor(1, 0, 10, 0, 0);
     }

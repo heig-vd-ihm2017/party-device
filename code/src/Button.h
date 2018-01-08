@@ -20,5 +20,5 @@ public:
     }
 
 private:
-    bool _hasBeenPressed;
+    volatile bool _hasBeenPressed;
 };
