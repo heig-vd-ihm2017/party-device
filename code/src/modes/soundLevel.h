@@ -3,6 +3,10 @@
 
 #include "Jewel.h"
 #include "MAX9814.h"
+#include "Metro.h"
+
+// Time to sample display time
+Metro displayTime = Metro(50);
 
 /**
   The modeSoundLevel is a mode that will turn on the a specific number of LEDs
@@ -21,13 +25,17 @@ void soundLevel(Jewel* jewel, MAX9814* mic) {
   // Calculate the range size of each interval
   uint16_t rangeSize = 255 / numberOfPixels;
 
-  // Turn off all pixels
-  jewel->setPixelsColor(0, 0, 0, 0);
+  // If display time has passed
+  if (displayTime.check()) {
+    // Turn off all pixels
+    jewel->setPixelsColor(0, 0, 0, 0);
 
-  // Turn on the one that are under the soundLevel
-  for (uint16_t i = 0; i * rangeSize < soundLevel; ++i) {
-    jewel->setPixelColor(i, 5, 5, 5, 0);
+    // Turn on the one that are under the soundLevel
+    for (uint16_t i = 0; i * rangeSize < soundLevel; ++i) {
+      jewel->setPixelColor(i, 5, 5, 5, 0);
+    }
   }
+
 }
 
 #endif // SOUNDLEVEL_H
