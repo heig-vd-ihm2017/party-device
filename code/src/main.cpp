@@ -1,7 +1,7 @@
 #include <EnableInterrupt.h>
 
 #include "MAX9814.h"
-#include "Jewel.h"
+#include "JewelStripe.h"
 #include "Button.h"
 #include "Modes.h"
 
@@ -9,13 +9,13 @@
 #define LED_PIN 1 // Pin on which the NeoPixel is connected (Gemma: D1)
 #define MIC_PIN 1 // Pin on which the microphone is conncted (Gemma: D2/A1)
 
-#define NUMBER_OF_PIXELS 7 // Number of pixels you are using
+#define NUMBER_OF_JEWELS 1 // Number of jewel you are using
 
 Button modeButton;
-Jewel jewel(LED_PIN, NUMBER_OF_PIXELS);
+JewelStripe stripe(LED_PIN, NUMBER_OF_JEWELS);
 MAX9814 mic(MIC_PIN);
 
-void (*mode)(Jewel*, MAX9814*) = nullptr;
+void (*mode)(JewelStripe*, MAX9814*) = nullptr;
 
 void setup()
 {
@@ -34,6 +34,6 @@ void loop()
 
     } else {
       // Execute the current mode
-      mode(&jewel, &mic);
+      mode(&stripe, &mic);
     }
 }

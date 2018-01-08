@@ -13,18 +13,19 @@ class Jewel
 
 public:
 
+    static const uint8_t NUMBER_OF_PIXELS_PER_JEWEL;
     /**
      * Jewel Constructor.
      * @param pin The pin number on which the NeoPixel is connected.
      * @param numberOfPixels The number of NeoPixels connected
      */
     Jewel(uint8_t pin,
-        uint16_t numberOfNeoPixels,
+        uint8_t numberOfPixels = NUMBER_OF_PIXELS_PER_JEWEL,
         neoPixelType type = NEO_GRBW + NEO_KHZ800)
     :
-        _numberOfNeoPixels(numberOfNeoPixels)
+        _numberOfPixels(numberOfPixels)
     {
-        _pixels = Adafruit_NeoPixel(numberOfNeoPixels, pin, type);
+        _pixels = Adafruit_NeoPixel(numberOfPixels, pin, type);
         _pixels.begin();
 
         // Set the brightness to the max
@@ -39,12 +40,12 @@ public:
      * @param pixelNumber The pixel to apply the color.
      * @param pixelColor The color represented in hexadecimal.
      */
-    void setPixelColor(uint16_t pixelNumber, uint64_t pixelColor)
+    void setPixelColor(uint8_t pixelNumber, uint64_t pixelColor)
     {
-        uint16_t red = pixelColor >> 24;
-        uint16_t green = pixelColor >> 16;
-        uint16_t blue = pixelColor >> 8;
-        uint16_t white = pixelColor >> 0;
+        uint8_t red = pixelColor >> 24;
+        uint8_t green = pixelColor >> 16;
+        uint8_t blue = pixelColor >> 8;
+        uint8_t white = pixelColor >> 0;
 
         setPixelColor(pixelNumber, red, green, blue, white);
     }
@@ -57,7 +58,7 @@ public:
      * @param blue The intensity of blue for the color (between 0 and 255).
      * @param white The intensity of white for the color (between 0 and 255).
      */
-    void setPixelColor(uint16_t pixelNumber, uint8_t red, uint8_t green,  uint8_t blue, uint8_t white)
+    void setPixelColor(uint8_t pixelNumber, uint8_t red, uint8_t green,  uint8_t blue, uint8_t white)
     {
         _pixels.setPixelColor(pixelNumber, red, green, blue, white);
         _pixels.show();
@@ -69,10 +70,10 @@ public:
      */
     void setPixelsColor(uint64_t pixelColor)
     {
-        uint16_t red = pixelColor >> 24;
-        uint16_t green = pixelColor >> 16;
-        uint16_t blue = pixelColor >> 8;
-        uint16_t white = pixelColor >> 0;
+        uint8_t red = pixelColor >> 24;
+        uint8_t green = pixelColor >> 16;
+        uint8_t blue = pixelColor >> 8;
+        uint8_t white = pixelColor >> 0;
 
         setPixelsColor(red, green, blue, white);
     }
@@ -86,24 +87,26 @@ public:
      */
     void setPixelsColor(uint8_t red, uint8_t green,  uint8_t blue, uint8_t white)
     {
-        for (uint8_t pixelNumber = 0; pixelNumber < _numberOfNeoPixels; pixelNumber++)
+        for (uint8_t pixelNumber = 0; pixelNumber < _numberOfPixels; ++pixelNumber)
         {
             setPixelColor(pixelNumber, red, green, blue, white);
         }
     }
 
-    uint16_t numberOfPixels() {
-      return _numberOfNeoPixels;
+    uint8_t numberOfPixels() {
+      return _numberOfPixels;
     }
 
 protected:
 
     //! The number of NeoPixels.
-    uint16_t _numberOfNeoPixels;
+    uint8_t _numberOfPixels;
 
     //! The NeoPixel's object.
     Adafruit_NeoPixel _pixels;
 
 };
+
+const uint8_t Jewel::NUMBER_OF_PIXELS_PER_JEWEL = 7;
 
 #endif // JEWEL_H

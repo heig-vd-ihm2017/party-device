@@ -46,7 +46,7 @@ public:
     :
         _pin(pin),
         _gainControl(gainControl),
-        attackReleaseRatio(attackReleaseRatio)
+        _attackReleaseRatio(attackReleaseRatio)
     {
 
     }
@@ -55,7 +55,7 @@ public:
      * getSoundLevel Get the sound level from the microphone.
      * @return The sound level between 0 and 255.
      */
-    uint16_t soundLevel()
+    uint8_t soundLevel()
     {
         uint16_t sample;
 
@@ -100,6 +100,6 @@ protected:
     GainControl _gainControl;
 
     //! The current applied attack/release ratio for the microphone.
-    AttackReleaseRatio attackReleaseRatio;
+    AttackReleaseRatio _attackReleaseRatio;
 };
 #endif // MAX9814_H

@@ -28,7 +28,7 @@ Metro metroDisplayTime(400);
 /**
   Set the other LEDs to green (success = true) or red (success = false)
 */
-void setRythmLedColor(Jewel* jewel, bool success);
+void setRythmLedColor(JewelStripe* jewelStripe, bool success);
 
 /**
   This mode is a fixed rate rythm game. The mode turns the central LED
@@ -36,12 +36,12 @@ void setRythmLedColor(Jewel* jewel, bool success);
   when the LED is on, he is in rythm. If he misses the beat or makes sound when the
   LED is off, he is off-rythm.
 */
-void fixedRateRythmGame(Jewel* jewel, MAX9814* mic) {
+void fixedRateRythmGame(JewelStripe* jewelStripe, MAX9814* mic) {
 
   // Show the tempo to follow
   if (metroTempo.check()) {
     // Turn the central led on
-    jewel->setPixelColor(0, 5, 5, 5, 0);
+    jewelStripe->setPixelColor(0, 5, 5, 5, 0);
 
     // Reset the timer of display time
     metroDisplayTime.reset();
@@ -53,7 +53,7 @@ void fixedRateRythmGame(Jewel* jewel, MAX9814* mic) {
     rythm = false;
   } else if (metroDisplayTime.check()) {
     // The LED display time has ended, turn it off
-    jewel->setPixelColor(0, 0, 0, 0, 0);
+    jewelStripe->setPixelColor(0, 0, 0, 0, 0);
 
     // We are no longer in the tempo time period
     tempo = false;
@@ -77,19 +77,19 @@ void fixedRateRythmGame(Jewel* jewel, MAX9814* mic) {
 
   // Set the color of the other LEDs according to the rythm
   if (rythm) {
-    setRythmLedColor(jewel, true);
+    setRythmLedColor(jewelStripe, true);
   } else if (!tempo && !rythm) {
-    setRythmLedColor(jewel, false);
+    setRythmLedColor(jewelStripe, false);
   }
 }
 
-void setRythmLedColor(Jewel* jewel, bool success) {
-  uint16_t N = jewel->numberOfPixels();
+void setRythmLedColor(JewelStripe* jewelStripe, bool success) {
+  uint16_t N = jewelStripe->numberOfPixels();
   for (uint16_t i = 1; i < N; ++i) {
     if (success) {
-      jewel->setPixelColor(i, 0, 5, 0, 0);
+      jewelStripe->setPixelColor(i, 0, 5, 0, 0);
     } else {
-      jewel->setPixelColor(i, 5, 0, 0, 0);
+      jewelStripe->setPixelColor(i, 5, 0, 0, 0);
     }
   }
 }

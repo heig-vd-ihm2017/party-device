@@ -13,20 +13,20 @@
   The mode will then turn on the LEDs that correspond to the intervals given
   they are inferior to the sound level perceived by the mic.
 */
-void soundLevel(Jewel* jewel, MAX9814* mic) {
+void soundLevel(JewelStripe* jewelStripe, MAX9814* mic) {
   // Get the sound level and the number of pixels that are used
   uint16_t soundLevel = mic->soundLevel();
-  uint16_t numberOfPixels = jewel->numberOfPixels();
+  uint16_t numberOfPixels = jewelStripe->numberOfPixels();
 
   // Calculate the range size of each interval
   uint16_t rangeSize = 255 / numberOfPixels;
 
   // Turn off all pixels
-  jewel->setPixelsColor(0, 0, 0, 0);
+  jewelStripe->setPixelsColor(0, 0, 0, 0);
 
   // Turn on the one that are under the soundLevel
   for (uint16_t i = 0; i * rangeSize < soundLevel; ++i) {
-    jewel->setPixelColor(i, 5, 5, 5, 0);
+    jewelStripe->setPixelColor(i, 5, 5, 5, 0);
   }
 }
 
