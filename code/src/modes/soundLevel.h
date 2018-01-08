@@ -4,6 +4,23 @@
 #include "Jewel.h"
 #include "MAX9814.h"
 #include "Metro.h"
+#include "modes/modeInterface.h"
+
+class SoundLevel : public Mode {
+public:
+  SoundLevel(Jewel* jewel, MAX9814* mic) :
+    jewel(jewel),
+    mic(mic)
+    {}
+
+  virtual void apply() {
+    jewel->setPixelsColor(5, 0, 0, 0);
+  }
+
+private:
+  Jewel* jewel;
+  MAX9814* mic;
+};
 
 // Time to sample display time
 Metro displayTime = Metro(50);

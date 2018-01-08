@@ -5,6 +5,23 @@
 
 #include "Jewel.h"
 #include "MAX9814.h"
+#include "modes/modeInterface.h"
+
+class FixedRateRythmGame : public Mode {
+public:
+  FixedRateRythmGame(Jewel* jewel, MAX9814* mic) :
+    jewel(jewel),
+    mic(mic)
+    {}
+
+  virtual void apply() {
+    jewel->setPixelsColor(0, 5, 0, 0);
+  }
+
+private:
+  Jewel* jewel;
+  MAX9814* mic;
+};
 
 /*
   The tempo variable represents whether we are inside the "tempo period", aka

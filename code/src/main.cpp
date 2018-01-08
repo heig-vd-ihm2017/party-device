@@ -17,6 +17,13 @@ MAX9814 mic(MIC_PIN);
 
 void (*mode)(Jewel*, MAX9814*) = nullptr;
 
+SoundLevel s = SoundLevel(&jewel, &mic);
+FixedRateRythmGame f = FixedRateRythmGame(&jewel, &mic);
+
+Mode* m = &s;
+
+bool lol = false;
+
 void setup()
 {
     // Enable interruption for the button
@@ -26,14 +33,28 @@ void setup()
     mode = soundLevel;
 }
 
+Metro m2 = Metro(1000);
+
 void loop()
 {
-    if (modeButton.hasBeenPressed()) {
-      // TODO change the mode of the party device
-      mode = fixedRateRythmGame;
+    // if (modeButton.hasBeenPressed()) {
+    //   // TODO change the mode of the party device
+    //   mode = fixedRateRythmGame;
+    //
+    // } else {
+    //   // Execute the current mode
+    //   mode(&jewel, &mic);
+    // }
+    m->apply();
 
-    } else {
-      // Execute the current mode
-      mode(&jewel, &mic);
+    if(m2.check()) {
+      if (lol) {
+        m = &f;
+        lol = false;
+      } else {
+        m = &s;
+        lol = true;
+      }
     }
+
 }
