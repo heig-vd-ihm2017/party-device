@@ -1,5 +1,5 @@
-#ifndef MODELOADER_H
-#define MODELOADER_H
+#ifndef MODECONTROLLER_H
+#define MODECONTROLLER_H
 
 #include "modes/Mode.h"
 
@@ -50,4 +50,4 @@ private:
   uint8_t _currentMode;
 };
 
-#endif
+#endif // MODECONTROLLER_H

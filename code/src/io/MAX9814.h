@@ -30,9 +30,7 @@ enum class GainControl : uint8_t { UNCONNECTED, GND, VDD };
  */
 enum class AttackReleaseRatio : uint8_t { UNCONNECTED, VDD, GND };
 
-class MAX9814
-{
-
+class MAX9814 {
 public:
     /**
      * Microphone Constructor.
@@ -48,15 +46,14 @@ public:
         _gainControl(gainControl),
         _attackReleaseRatio(attackReleaseRatio)
     {
-
+        // Empty
     }
 
     /**
      * getSoundLevel Get the sound level from the microphone.
      * @return The sound level between 0 and 255.
      */
-    uint8_t soundLevel()
-    {
+    uint8_t soundLevel() {
         uint16_t sample;
 
         uint16_t peakToPeak = 0;
@@ -92,7 +89,6 @@ public:
     }
 
 protected:
-
     //! The pin used to access the microphone.
     uint8_t _pin;
 
@@ -102,4 +98,5 @@ protected:
     //! The current applied attack/release ratio for the microphone.
     AttackReleaseRatio _attackReleaseRatio;
 };
+
 #endif // MAX9814_H
