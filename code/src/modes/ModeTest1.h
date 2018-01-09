@@ -1,23 +1,26 @@
 #ifndef MODETEST1_H
-#define MODETEST2_H
+#define MODETEST1_H
 
 #include "modes/Mode.h"
 
 class ModeTest1 : public Mode {
 public:
-  ModeTest1(JewelStripe& stripe, MAX9814& mic) :
-    _stripe(stripe),
-    _mic(mic)
+    ModeTest1(JewelStripe& stripe,
+        MAX9814& mic)
+    :
+        _stripe(stripe),
+        _mic(mic)
     {
+        // Empty
     }
 
-  virtual void apply() {
-    _stripe.setPixelsColor(0, 5, 0, 0);
-  }
+    virtual void apply() {
+        _stripe.setPixelsColor(5, 0, 0, 0);
+    }
 
 private:
-  JewelStripe _stripe;
-  MAX9814 _mic;
+    JewelStripe _stripe;
+    MAX9814 _mic;
 };
 
-#endif // SOUNDLEVEL_H
+#endif // MODETEST1_H
