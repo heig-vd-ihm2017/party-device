@@ -3,5 +3,7 @@
 
 #include "modes/ModeTest1.h"
 #include "modes/ModeTest2.h"
+#include "modes/ModeTest3.h"
+#include "modes/ModeTest4.h"
 
 #endif // MODES_H

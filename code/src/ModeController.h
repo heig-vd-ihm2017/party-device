@@ -1,26 +1,42 @@
 #ifndef MODELOADER_H
 #define MODELOADER_H
 
-#include "Modes.h"
+#include "modes/Mode.h"
 
 class ModeController {
 public:
-  ModeController(Mode* modes[], uint8_t numberOfModes) :
-    _numberOfModes(numberOfModes),
-    _index(0)
-  {
+
+    /**
+     * ModeController constructor.
+     */
+    ModeController() :
+        _numberOfModes(0),
+        _currentMode(0)
+    {
+        // Empty
+    }
+
+  /**
+   * Add the modes to the controller.
+   */
+  virtual void addModes(Mode* modes[], uint8_t numberOfModes) {
       _modes = modes;
+      _numberOfModes = numberOfModes;
   }
 
   /**
-    Finds the next mode in the array.
-  */
+   * Finds the next mode in the array.
+   */
   virtual void loadNextMode() {
-      _index = ++_index % _numberOfModes;
+      uint8_t nextMode = ++_currentMode % _numberOfModes;
+      _currentMode = nextMode;
   }
 
+  /**
+   * Run the mode.
+   */
   virtual void runMode() {
-      _modes[_index]->apply();
+      _modes[_currentMode]->apply();
   }
 
 private:
@@ -31,7 +47,7 @@ private:
   uint8_t _numberOfModes;
 
   //! Index of the current mode
-  uint8_t _index;
+  uint8_t _currentMode;
 };
 
 #endif

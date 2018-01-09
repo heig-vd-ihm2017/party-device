@@ -1,5 +1,6 @@
 #include <EnableInterrupt.h>
 
+#include "Modes.h"
 #include "ModeController.h"
 #include "MAX9814.h"
 #include "JewelStripe.h"
@@ -11,38 +12,34 @@
 
 #define NUMBER_OF_JEWELS 1 // Number of jewel you are using
 
+// Define the input/output hardware
 Button modeButton;
-
 JewelStripe stripe(LED_PIN, NUMBER_OF_JEWELS);
 MAX9814 mic(MIC_PIN);
 
+// Define the mode controller and create the modes
+ModeController modeController;
 ModeTest1 modeTest1(stripe, mic);
 ModeTest2 modeTest2(stripe, mic);
-
-Mode* modes[] = {&modeTest1, &modeTest2};
-
-ModeController modeController(modes, 2);
+ModeTest3 modeTest3(stripe, mic);
+ModeTest4 modeTest4(stripe, mic);
+Mode* modes[] = {&modeTest1, &modeTest2, &modeTest3, &modeTest4};
 
 void setup()
 {
     // Enable interruption for the button
-    enableInterrupt(BTN_PIN, []() { modeButton.pressed(); }, CHANGE);
+    enableInterrupt(BTN_PIN, []() { modeButton.pressed(); }, FALLING);
+
+    // Add the modes to the controller
+    uint8_t numberOfModes = sizeof(modes) / sizeof(modes[0]);
+    modeController.addModes(modes, numberOfModes);
 }
 
 void loop()
 {
-    modeController.runMode();
-    delay(1000);
-    modeController.loadNextMode();
-    modeController.runMode();
-    delay(1000);
-
-    /*
     if (modeButton.hasBeenPressed()) {
-        modeLoader.loadNextMode();
-        modeLoader.runMode();
+        modeController.loadNextMode();
     } else {
-
+        modeController.runMode();
     }
-    */
 }

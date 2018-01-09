@@ -11,7 +11,7 @@ public:
     }
 
     bool hasBeenPressed() {
-        if (_hasBeenPressed == true) {
+        if (_hasBeenPressed) {
             _hasBeenPressed = false;
             return true;
         }
