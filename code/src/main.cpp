@@ -2,9 +2,9 @@
 
 #include "Modes.h"
 #include "ModeController.h"
-#include "MAX9814.h"
-#include "JewelStripe.h"
-#include "Button.h"
+#include "io/MAX9814.h"
+#include "io/JewelStripe.h"
+#include "io/Button.h"
 
 #define BTN_PIN 0 // Pin on which the button is conncted (Gemma: D0)
 #define LED_PIN 1 // Pin on which the NeoPixel is connected (Gemma: D1)

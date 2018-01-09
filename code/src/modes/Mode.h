@@ -1,8 +1,8 @@
 #ifndef MODEINTERFACE_H
 #define MODEINTERFACE_H
 
-#include "JewelStripe.h"
-#include "MAX9814.h"
+#include "io/JewelStripe.h"
+#include "io/MAX9814.h"
 
 class Mode {
 public:
