@@ -15,7 +15,7 @@ public:
     }
 
     virtual void apply() {
-        _stripe.setPixelsColor(5, 0, 0, 0);
+        _stripe.setJewelColor(1, 0x05000000);
     }
 
 private:

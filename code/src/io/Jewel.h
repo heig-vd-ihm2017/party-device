@@ -31,7 +31,7 @@ public:
     }
 
     /**
-     * Set the colors of a specific pixel.
+     * Set the color of a specific pixel.
      * @param pixelNumber The pixel to apply the color.
      * @param pixelColor The color represented in hexadecimal.
      */
@@ -45,7 +45,7 @@ public:
     }
 
     /**
-     * Set the colors of a specific pixel.
+     * Set the color of a specific pixel.
      * @param pixelNumber The pixel to apply the color.
      * @param red The intensity of red for the color (between 0 and 255).
      * @param green The intensity of green for the color (between 0 and 255).
@@ -58,7 +58,7 @@ public:
     }
 
     /**
-     * Set the colors for all pixels.
+     * Set the color for all pixels.
      * @param pixelColor The color represented in hexadecimal.
      */
     void setPixelsColor(uint32_t pixelColor) {
@@ -71,7 +71,7 @@ public:
     }
 
     /**
-     * Set the colors for all pixels.
+     * Set the color for all pixels.
      * @param red The intensity of red for the color (between 0 and 255).
      * @param green The intensity of green for the color (between 0 and 255).
      * @param blue The intensity of blue for the color (between 0 and 255).
