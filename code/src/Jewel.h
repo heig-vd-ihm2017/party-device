@@ -13,7 +13,9 @@ class Jewel
 
 public:
 
+    //! Number of pixels per Jewel
     static const uint8_t NUMBER_OF_PIXELS_PER_JEWEL;
+
     /**
      * Jewel Constructor.
      * @param pin The pin number on which the NeoPixel is connected.
