@@ -161,7 +161,7 @@ Add the following line in the file `Modes.h`:
 #include "modes/MyNewMode.h"
 ```
 
-Then, you can edit the method `apply()` in `modes/MyNewMode.h` to do whatever you want with `_stripe` and `_mic`.
+Then, you can edit the method `apply()` in `modes/MyNewMode.h` to do whatever you want with `_stripe` and `_mic`. Feel free to see the available modes in the `modes` folder !
 
 ## Developers
 Here are some resources for developers.
