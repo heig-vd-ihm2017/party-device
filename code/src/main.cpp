@@ -21,11 +21,12 @@ MAX9814 mic(MIC_PIN);
 ModeController modeController;
 FixedRateRythmGame mode1(&stripe, &mic);
 SoundLevel mode2(&stripe, &mic);
+ColorSoundLevel mode3(&stripe, &mic);
 //ModeTest1 modeTest1(stripe, mic);
 //ModeTest2 modeTest2(stripe, mic);
 //ModeTest3 modeTest3(stripe, mic);
 //ModeTest4 modeTest4(stripe, mic);
-Mode* modes[] = {&mode1, &mode2};
+Mode* modes[] = {&mode3, &mode1, &mode2};
 
 void setup()
 {

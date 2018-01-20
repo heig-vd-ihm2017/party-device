@@ -7,5 +7,6 @@
 #include "modes/ModeTest4.h"
 #include "modes/fixedRateRythmGame.h"
 #include "modes/soundLevel.h"
+#include "modes/ColorSoundLevel.h"
 
 #endif // MODES_H

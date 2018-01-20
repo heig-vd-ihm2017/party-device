@@ -30,7 +30,7 @@ public:
       for (uint8_t j = 1; j <= _numberOfJewels; ++j ) {
         for (uint16_t i = 0; i < 7; ++i) {
           if (i * rangeSize <= soundLevel) {
-            _stripe->setPixelColorInJewel(j, i, 5, 5, 5, 0);
+            _stripe->setPixelColorInJewel(j, i, 10, 2, 4, 0);
           }
         }
       }
