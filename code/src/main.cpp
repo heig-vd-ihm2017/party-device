@@ -19,11 +19,13 @@ MAX9814 mic(MIC_PIN);
 
 // Define the mode controller and create the modes
 ModeController modeController;
-ModeTest1 modeTest1(stripe, mic);
-ModeTest2 modeTest2(stripe, mic);
-ModeTest3 modeTest3(stripe, mic);
-ModeTest4 modeTest4(stripe, mic);
-Mode* modes[] = {&modeTest1, &modeTest2, &modeTest3, &modeTest4};
+FixedRateRythmGame mode1(&stripe, &mic);
+SoundLevel mode2(&stripe, &mic);
+//ModeTest1 modeTest1(stripe, mic);
+//ModeTest2 modeTest2(stripe, mic);
+//ModeTest3 modeTest3(stripe, mic);
+//ModeTest4 modeTest4(stripe, mic);
+Mode* modes[] = {&mode2, &mode1};
 
 void setup()
 {
