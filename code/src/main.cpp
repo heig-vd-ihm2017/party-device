@@ -25,7 +25,7 @@ SoundLevel mode2(&stripe, &mic);
 //ModeTest2 modeTest2(stripe, mic);
 //ModeTest3 modeTest3(stripe, mic);
 //ModeTest4 modeTest4(stripe, mic);
-Mode* modes[] = {&mode2, &mode1};
+Mode* modes[] = {&mode1, &mode2};
 
 void setup()
 {

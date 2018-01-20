@@ -82,9 +82,9 @@ public:
       // Set all but the center pixel to the wanted color
       for (uint16_t i = 1; i < Jewel::NUMBER_OF_PIXELS_PER_JEWEL; ++i) {
         if (success) {
-            _stripe->setPixelColorInJewel(j, i, 0, 0, 0, 0);
+            _stripe->setPixelColorInJewel(j, i, 0, 5, 0, 0);
         } else {
-            _stripe->setPixelColorInJewel(j, i, 0, 0, 0, 0);
+            _stripe->setPixelColorInJewel(j, i, 5, 0, 0, 0);
         }
       }
     }
