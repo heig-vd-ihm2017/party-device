@@ -1,83 +1,47 @@
 #include <EnableInterrupt.h>
 
-#include "MAX9814.h"
-#include "Jewel.h"
-#include "Button.h"
 #include "Modes.h"
+#include "ModeController.h"
+#include "io/MAX9814.h"
+#include "io/JewelStripe.h"
+#include "io/Button.h"
 
-#define BTN_PIN 0 // NEED TO CHANGE THIS TO 0. CONNECT TO THE MIC PIN Pin on which the button is conncted (Gemma: D0)
+#define BTN_PIN 0 // Pin on which the button is conncted (Gemma: D0)
 #define LED_PIN 1 // Pin on which the NeoPixel is connected (Gemma: D1)
 #define MIC_PIN 1 // Pin on which the microphone is conncted (Gemma: D2/A1)
 
-#define NUMBER_OF_PIXELS 7 // Number of pixels you are using
+#define NUMBER_OF_JEWELS 1 // Number of jewel you are using
 
+// Define the input/output hardware
 Button modeButton;
-Jewel jewel(LED_PIN, NUMBER_OF_PIXELS);
+JewelStripe stripe(LED_PIN, NUMBER_OF_JEWELS);
 MAX9814 mic(MIC_PIN);
 
-//ModeLoader modeLoader(2, &jewel);
-
-Mode* soundLevel = new SoundLevel(&jewel, &mic);
-Mode* fixedRateRythmGame = new FixedRateRythmGame(&jewel, &mic);
-
-Metro metro = Metro(2000);
-
-Mode** modes = (Mode**) new Mode*[2];
-
-int16_t index = 0;
-
-Mode* mode = NULL;
+// Define the mode controller and create the modes
+ModeController modeController;
+FixedRateRythmGame mode1(&stripe, &mic);
+SoundLevel mode2(&stripe, &mic);
+//ModeTest1 modeTest1(stripe, mic);
+//ModeTest2 modeTest2(stripe, mic);
+//ModeTest3 modeTest3(stripe, mic);
+//ModeTest4 modeTest4(stripe, mic);
+Mode* modes[] = {&mode2, &mode1};
 
 void setup()
 {
     // Enable interruption for the button
-    enableInterrupt(BTN_PIN, []() { modeButton.pressed(); }, CHANGE);
+    enableInterrupt(BTN_PIN, []() { modeButton.pressed(); }, FALLING);
 
-    //modeLoader.addMode(&soundLevel);
-    //modeLoader.addMode(&fixedRateRythmGame);
-
-    //modes = (Mode**) malloc(2 * sizeof(Mode*));
-    modes[0] = soundLevel;
-    modes[1] = fixedRateRythmGame;
-
-    mode = fixedRateRythmGame;
+    // Add the modes to the controller
+    uint8_t numberOfModes = sizeof(modes) / sizeof(modes[0]);
+    modeController.addModes(modes, numberOfModes);
 }
 
 void loop()
 {
-
-    // if (modeButton.hasBeenPressed() || metro.check()) {
-    //
-    //     jewel.setPixelsColor(0, 0, 5, 0);
-    // } else {
-    //   jewel.setPixelsColor(0, 0, 5, 0);
-    //     //modeLoader.runMode();
-    // }
-
-    // if (metro.check()) {
-    //   if (lol) {
-    //     modeLoader.loadNextMode();
-    //     lol = false;
-    //   } else {
-    //     lol = true;
-    //   }
-    // }
-    if (metro.check()) {
-      index = (index + 1) % 2;
-      metro.reset();
+    if (modeButton.hasBeenPressed()) {
+        modeController.loadNextMode();
+    } else {
+        modeController.runMode();
     }
-
-    //modes[index]->apply();
-    soundLevel->apply();
-
-    //mode->apply();
-
-    // if (index == 1) {
-    //   jewel.setPixelsColor(0, 0, 5, 0);
-    // } else {
-    //   jewel.setPixelsColor(0, 0, 0, 0);
-    //   //modes[index]->apply();
-    // }
-    //modeLoader.runMode();
-
 }
