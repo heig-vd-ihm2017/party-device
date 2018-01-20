@@ -21,7 +21,7 @@ MAX9814 mic(MIC_PIN);
 ModeController modeController;
 FixedRateRythmGame mode1(&stripe, &mic);
 SoundLevel mode2(&stripe, &mic);
-ColorSoundLevel mode3(&stripe, &mic);
+MovingPoint mode3(&stripe, &mic);
 //ModeTest1 modeTest1(stripe, mic);
 //ModeTest2 modeTest2(stripe, mic);
 //ModeTest3 modeTest3(stripe, mic);
