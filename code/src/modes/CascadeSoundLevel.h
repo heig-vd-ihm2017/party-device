@@ -19,24 +19,24 @@ public:
     _numberOfJewels(stripe->numberOfJewels())
   {
     color[0] = 230;
-		color[1] = 80;
-		color[2] = 150;
-    color[3] = 220;
-    color[4] = 220;
-    color[5] = 150;
-    color[6] = 80;
+		color[1] = 220;
+		color[2] = 160;
+    color[3] = 80;
+    color[4] = 0;
+    color[5] = 80;
+    color[6] = 160;
   }
 
   virtual void apply() {
     uint8_t soundLevel = (float)_mic->soundLevel();
 
     if(soundLevel >= 30) {
-  		color[1] = (color[1] + 70) % 255;
-  		color[2] = (color[2] + 70) % 255;
-      color[3] = (color[3] + 70) % 255;
-      color[4] = (color[4] + 70) % 255;
-      color[5] = (color[5] + 70) % 255;
-      color[6] = (color[6] + 70) % 255;
+  		color[1] = (color[1] + 80) % 300;
+  		color[2] = (color[2] + 80) % 300;
+      color[3] = (color[3] + 80) % 300;
+      color[4] = (color[4] + 80) % 300;
+      color[5] = (color[5] + 80) % 300;
+      color[6] = (color[6] + 80) % 300;
     }
 
     _stripe->setPixelColor(0, color[0], 0, 0, 0);
