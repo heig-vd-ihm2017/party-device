@@ -16,7 +16,7 @@ private:
 
   float color[3];
   float multiplier[3];
-  uint8_t direction[6][7];
+  uint8_t direction[3][7];
   uint8_t i = 0;
 
 public:
@@ -33,21 +33,21 @@ public:
 		multiplier[1] = multiplier_down;
 		multiplier[2] = multiplier_down;
 
-    direction[0][0] = 1;
+    direction[0][0] = 6;
     direction[0][1] = 0;
-    direction[0][2] = 4;
-    direction[0][3] = 6;
-    direction[0][4] = 5;
-    direction[0][5] = 2;
-    direction[0][6] = 3;
+    direction[0][2] = 3;
+    direction[0][3] = 5;
+    direction[0][4] = 4;
+    direction[0][5] = 1;
+    direction[0][6] = 2;
 
-    direction[1][0] = 6;
+    direction[1][0] = 1;
     direction[1][1] = 0;
-    direction[1][2] = 3;
-    direction[1][3] = 5;
-    direction[1][4] = 4;
-    direction[1][5] = 1;
-    direction[1][6] = 2;
+    direction[1][2] = 4;
+    direction[1][3] = 6;
+    direction[1][4] = 5;
+    direction[1][5] = 2;
+    direction[1][6] = 3;
 
     direction[2][0] = 2;
     direction[2][1] = 0;
@@ -56,37 +56,13 @@ public:
     direction[2][4] = 6;
     direction[2][5] = 3;
     direction[2][6] = 4;
-
-    direction[3][0] = 3;
-    direction[3][1] = 0;
-    direction[3][2] = 6;
-    direction[3][3] = 2;
-    direction[3][4] = 1;
-    direction[3][5] = 4;
-    direction[3][6] = 5;
-
-    direction[4][0] = 4;
-    direction[4][1] = 0;
-    direction[4][2] = 1;
-    direction[4][3] = 3;
-    direction[4][4] = 2;
-    direction[4][5] = 5;
-    direction[4][6] = 6;
-
-    direction[5][0] = 5;
-    direction[5][1] = 0;
-    direction[5][2] = 2;
-    direction[5][3] = 4;
-    direction[5][4] = 3;
-    direction[5][5] = 6;
-    direction[5][6] = 1;
   }
 
   virtual void apply() {
     uint8_t soundLevel = (float)_mic->soundLevel();
 
     if(soundLevel >= 30) {
-      i = (i + 1) % 6;
+      i = (i + 1) % 3;
     }
 
 		if (color[0] <= 10) {
