@@ -48,4 +48,4 @@ public:
   }
 };
 
-#endif // CROSSLINESOUNDLEVEL_H
+#endif // LINESOUNDLEVEL_H

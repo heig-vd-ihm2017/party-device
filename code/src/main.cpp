@@ -10,23 +10,30 @@
 #define LED_PIN 1 // Pin on which the NeoPixel is connected (Gemma: D1)
 #define MIC_PIN 1 // Pin on which the microphone is conncted (Gemma: D2/A1)
 
-#define NUMBER_OF_JEWELS 1 // Number of jewel you are using
+#define NUMBER_OF_JEWELS 2 // Number of jewel you are using
 
 // Define the input/output hardware
 Button modeButton;
 JewelStripe stripe(LED_PIN, NUMBER_OF_JEWELS);
 MAX9814 mic(MIC_PIN);
 
-// Define the mode controller and create the modes
 ModeController modeController;
-FixedRateRythmGame mode1(&stripe, &mic);
-SoundLevel mode2(&stripe, &mic);
+
+// Define the modes
+//FixedRateRythmGame mode1(&stripe, &mic);
+//SoundLevel mode2(&stripe, &mic);
 MovingPoint mode3(&stripe, &mic);
-//ModeTest1 modeTest1(stripe, mic);
-//ModeTest2 modeTest2(stripe, mic);
-//ModeTest3 modeTest3(stripe, mic);
-//ModeTest4 modeTest4(stripe, mic);
-Mode* modes[] = {&mode3, &mode1, &mode2};
+CascadeSoundLevel mode4(&stripe, &mic);
+//OneRandomLedRainbow mode5(&stripe, &mic);
+SideBySide mode6(&stripe, &mic);
+Mode* modes[] = {
+    //&mode1,
+    //&mode2,
+    &mode3,
+    &mode4,
+    //&mode5,
+    &mode6
+};
 
 void setup()
 {
@@ -34,7 +41,7 @@ void setup()
     enableInterrupt(BTN_PIN, []() { modeButton.pressed(); }, FALLING);
 
     // Add the modes to the controller
-    uint8_t numberOfModes = sizeof(modes) / sizeof(modes[0]);
+    uint8_t numberOfModes = sizeof(modes) / sizeof(Mode);
     modeController.addModes(modes, numberOfModes);
 }
 
@@ -42,6 +49,7 @@ void loop()
 {
     while (true) {
         if (modeButton.hasBeenPressed()) {
+            stripe.reset();
             modeController.loadNextMode();
         } else {
             modeController.runMode();

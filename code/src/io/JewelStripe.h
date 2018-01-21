@@ -160,6 +160,15 @@ public:
         return _stripe->color(red, green, blue, white);
     }
 
+    /**
+     * Reset the stripe to no colors.
+     */
+    void reset() {
+        for (uint8_t jewelNo = 1; jewelNo <= _numberOfJewels; ++jewelNo) {
+            setJewelColor(jewelNo, 0x00000000);
+        }
+    }
+
 protected:
     //! Stripe of jewels.
     Jewel* _stripe;
