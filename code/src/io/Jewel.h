@@ -12,7 +12,8 @@ public:
     /**
      * Jewel Constructor.
      * @param pin The pin number on which the NeoPixel is connected.
-     * @param numberOfPixels The number of NeoPixels connected
+     * @param numberOfPixels The number of NeoPixels connected.
+     * @param type The type of NeoPixel.
      */
     Jewel(uint8_t pin,
         uint8_t numberOfPixels = NUMBER_OF_PIXELS_PER_JEWEL,
@@ -77,12 +78,28 @@ public:
      * @param blue The intensity of blue for the color (between 0 and 255).
      * @param white The intensity of white for the color (between 0 and 255).
      */
-    void setPixelsColor(uint8_t red, uint8_t green,  uint8_t blue, uint8_t white) {
+    void setPixelsColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t white) {
         for (uint8_t pixelNumber = 0; pixelNumber < _numberOfPixels; ++pixelNumber) {
             setPixelColor(pixelNumber, red, green, blue, white);
         }
     }
 
+    /**
+     * Return the color in hexadecimal.
+     * @param red The intensity of red for the color (between 0 and 255).
+     * @param green The intensity of green for the color (between 0 and 255).
+     * @param blue The intensity of blue for the color (between 0 and 255).
+     * @param white The intensity of white for the color (between 0 and 255).
+     * @returns The color in hexadecimal.
+     */
+    uint32_t color(uint8_t red, uint8_t green, uint8_t blue, uint8_t white) {
+        return ((uint32_t)red << 24) | ((uint32_t)green << 16) | ((uint32_t)blue <<  8) | white;
+    }
+
+    /**
+     * Return the number of pixels
+     * @returns The number of pixels
+     */
     uint8_t numberOfPixels() {
       return _numberOfPixels;
     }

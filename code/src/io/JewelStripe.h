@@ -148,6 +148,18 @@ public:
       return _stripe->numberOfPixels();
     }
 
+    /**
+     * Return the color in hexadecimal.
+     * @param red The intensity of red for the color (between 0 and 255).
+     * @param green The intensity of green for the color (between 0 and 255).
+     * @param blue The intensity of blue for the color (between 0 and 255).
+     * @param white The intensity of white for the color (between 0 and 255).
+     * @returns The color in hexadecimal.
+     */
+    uint32_t color(uint8_t red, uint8_t green, uint8_t blue, uint8_t white) {
+        return _stripe->color(red, green, blue, white);
+    }
+
 protected:
     //! Stripe of jewels.
     Jewel* _stripe;

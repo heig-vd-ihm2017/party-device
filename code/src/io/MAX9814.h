@@ -63,20 +63,15 @@ public:
         uint32_t startChorno = millis();
 
         // Sample for 20 ms
-        while (millis() - startChorno < 20)
-        {
+        while (millis() - startChorno < 20) {
             sample = analogRead(_pin);
 
             // Toss out spurious readings
-            if (sample < 1024)
-            {
-                if (sample > signalMax)
-                {
+            if (sample < 1024) {
+                if (sample > signalMax) {
                     // Save just the max levels
                     signalMax = sample;
-                }
-                else if (sample < signalMin)
-                {
+                } else if (sample < signalMin) {
                     // Save just the min levels
                     signalMin = sample;
                 }
