@@ -31,7 +31,6 @@ public:
     uint8_t soundLevel = (float)_mic->soundLevel();
 
     if(soundLevel >= 30) {
-      color[0] = (color[0] + 70) % 255;
   		color[1] = (color[1] + 70) % 255;
   		color[2] = (color[2] + 70) % 255;
       color[3] = (color[3] + 70) % 255;
