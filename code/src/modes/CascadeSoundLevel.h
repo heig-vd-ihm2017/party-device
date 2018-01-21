@@ -10,12 +10,7 @@ private:
   MAX9814* _mic;
   const uint8_t _numberOfJewels;
 
-  uint8_t init_intensity = 200;
-  float multiplier_down = 0.9f;
-  float multiplier_up = 1.1f;
-
-  float color[3];
-  float multiplier[3];
+  uint8_t color[7];
 
 public:
   CascadeSoundLevel(JewelStripe* stripe, MAX9814* mic) :
@@ -23,49 +18,35 @@ public:
     _mic(mic),
     _numberOfJewels(stripe->numberOfJewels())
   {
-    color[0] = init_intensity + 55;
-		color[1] = init_intensity + 25;
-		color[2] = init_intensity;
-
-		multiplier[0] = multiplier_down;
-		multiplier[1] = multiplier_down;
-		multiplier[2] = multiplier_down;
+    color[0] = 230;
+		color[1] = 80;
+		color[2] = 150;
+    color[3] = 220;
+    color[4] = 220;
+    color[5] = 150;
+    color[6] = 80;
   }
 
   virtual void apply() {
     uint8_t soundLevel = (float)_mic->soundLevel();
 
-		if (color[0] <= 10) {
-			multiplier[0] = multiplier_up;
-		} else if (color[0] >= init_intensity) {
-			multiplier[0] = multiplier_down;
-		}
+    if(soundLevel >= 30) {
+      color[0] = (color[0] + 70) % 255;
+  		color[1] = (color[1] + 70) % 255;
+  		color[2] = (color[2] + 70) % 255;
+      color[3] = (color[3] + 70) % 255;
+      color[4] = (color[4] + 70) % 255;
+      color[5] = (color[5] + 70) % 255;
+      color[6] = (color[6] + 70) % 255;
+    }
 
-		if (color[1] <= 10) {
-			multiplier[1] = multiplier_up;
-		} else if (color[1] >= init_intensity) {
-			multiplier[1] = multiplier_down;
-		}
-
-		if (color[2] <= 10) {
-			multiplier[2] = multiplier_up;
-		} else if (color[2] >= init_intensity) {
-			multiplier[2] = multiplier_down;
-		}
-
-    color[0] *= multiplier[0];
-    color[1] *= multiplier[1];
-    color[2] *= multiplier[2];
-
-    _stripe->setPixelColor(6, color[0], 0, 0, 0);
-    _stripe->setPixelColor(0, color[1], 0, 0, 0);
-    _stripe->setPixelColor(3, color[2], 0, 0, 0);
-
-    _stripe->setPixelColor(5, color[0], 0, 0, 0);
-    _stripe->setPixelColor(4, color[2], 0, 0, 0);
-
-    _stripe->setPixelColor(1, color[0], 0, 0, 0);
-    _stripe->setPixelColor(4, color[2], 0, 0, 0);
+    _stripe->setPixelColor(0, color[0], 0, 0, 0);
+    _stripe->setPixelColor(1, color[1], 0, 0, 0);
+    _stripe->setPixelColor(2, color[2], 0, 0, 0);
+    _stripe->setPixelColor(3, color[3], 0, 0, 0);
+    _stripe->setPixelColor(4, color[4], 0, 0, 0);
+    _stripe->setPixelColor(5, color[5], 0, 0, 0);
+    _stripe->setPixelColor(6, color[6], 0, 0, 0);
   }
 };
 
