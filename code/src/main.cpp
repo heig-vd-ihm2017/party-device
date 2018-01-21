@@ -37,9 +37,12 @@ void setup()
 
 void loop()
 {
-    if (modeButton.hasBeenPressed()) {
-        modeController.loadNextMode();
-    } else {
-        modeController.runMode();
+    while (true) {
+        if (modeButton.hasBeenPressed()) {
+            modeController.loadNextMode();
+        } else {
+            modeController.runMode();
+        }
     }
+
 }
