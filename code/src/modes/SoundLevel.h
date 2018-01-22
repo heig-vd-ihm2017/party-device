@@ -14,6 +14,10 @@ public:
     {
     }
 
+  /**
+    This mode lights up the Leds of a Jewel according to the sound level of the
+    mic. It will light up from 1 to 7 LEDs according to the sound level.
+  */
   virtual void apply() {
     // Get the sound level and the number of pixels that are used
     uint16_t soundLevel = _mic->soundLevel();

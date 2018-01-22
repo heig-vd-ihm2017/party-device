@@ -16,7 +16,12 @@ public:
 
     }
 
+  /**
+    This mode moves a point of light across the stripe of jewels.
+    It starts by listening for a sound and then runs a point of light.
+  */
   virtual void apply() {
+    // Listen
     if (_pos == 0) {
       _metro.reset();
       uint8_t soundLevel = _mic->soundLevel();
@@ -28,6 +33,7 @@ public:
         return;
       }
     } else {
+      // Move the point
       if (_metro.check()) {
         _stripe->setPixelColor(_pos,0, 0, 0, 0);
         uint8_t nextPos = ++_pos % _numberOfPixels;
